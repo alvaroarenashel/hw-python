@@ -9,6 +9,16 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.SourceVersion)'
+  ImageName: 'hw-python'
+  azureSubscription: HKI-kanslia-standalone
+  appName: hw-python
+  containerRegistry: registry.hub.docker.com
+
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
@@ -24,3 +34,23 @@ steps:
     command: 'build'
     Dockerfile: '**/Dockerfile'
     tags: 'hw-python'
+
+- script: 
+    docker tag $(ImageName):latest helsinki/$(ImageName):latest
+  displayName: Do image retagging for helsinki repo
+
+- task: Docker@2
+  displayName: Push image to Docker hub
+  inputs:
+    containerRegistry: Docker hub hw-python
+    repository: helsinki/$(ImageName)
+    command: push
+    tags: |
+      latest
+      $(tag)
+
+      - task: oc-cmd@2
+        displayName: Add OC tag to latest image
+        inputs:
+          openshiftService: Azure OpenShift-hw-python
+          cmd: 'tag docker.io/helsinki/hw-python:$(tag) hw-python:latest'
