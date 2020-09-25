@@ -14,7 +14,7 @@ resources:
 
 variables:
   tag: '$(Build.SourceVersion)'
-  ImageName: 'helsinki/hw-python'
+  ImageName: 'hw-python'
   azureSubscription: HKI-kanslia-standalone
   appName: hw-python
   containerRegistry: registry.hub.docker.com
@@ -37,7 +37,7 @@ steps:
   displayName: Push image to Docker hub
   inputs:
     containerRegistry: Docker hub upload-profiili-tunnistus
-    repository: $(ImageName)
+    repository: helsinki/$(ImageName)
     command: push
     tags: |
       latest
