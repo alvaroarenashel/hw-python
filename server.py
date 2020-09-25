@@ -52,7 +52,7 @@ class SimpleHandler(BaseHTTPRequestHandler):
 
 def run(server_class=HTTPServer, port=8080):
     storage = MessageStorage()
-    storage.set("Hola")
+    storage.set("Send a new msg in the POST body")
     handler = partial(SimpleHandler, storage)
     server_address = ('', port)
     httpd = server_class(server_address, handler)
