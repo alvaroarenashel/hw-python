@@ -29,7 +29,7 @@ steps:
     command: 'build'
     Dockerfile: '**/Dockerfile'
     tags: 'hw-python'
-    arguments: '-t hw-python'
+    arguments: '-t helsinki/hw-python'
 
 
 
