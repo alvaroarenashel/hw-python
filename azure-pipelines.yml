@@ -52,9 +52,5 @@ steps:
       latest
       $(tag)
 
-- task: oc-cmd@2
-  displayName: Add OC tag to latest image
-  inputs:
-    openshiftService: Azure OpenShift-hw-python
-    cmd: 'tag docker.io/helsinki/hw-python:$(tag) hw-python:latest'
+
 
