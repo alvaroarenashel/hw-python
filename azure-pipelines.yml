@@ -37,7 +37,7 @@ steps:
   displayName: Push image to Docker hub
   inputs:
     containerRegistry: Docker hub upload-profiili-tunnistus
-    repository: $(ImageName):latest
+    repository: $(ImageName)
     command: push
     tags: |
       latest
