@@ -35,9 +35,6 @@ steps:
     Dockerfile: '**/Dockerfile'
     tags: 'hw-python'
 
-- script: 
-    docker tag $(ImageName):latest helsinki/$(ImageName):latest
-  displayName: Do image retagging for helsinki repo
 
 - task: Docker@2
   displayName: Push image to Docker hub
