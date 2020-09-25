@@ -38,12 +38,14 @@ steps:
     tags: 'hw-python'
     arguments: '-t hw-python'
 
-- publish: $(build.artifactstagingdirectory)
-  artifact: ContainerImages
-
 - script: |
     docker tag $(ImageName):latest helsinki/$(ImageName):latest
     docker tag $(ImageName):latest helsinki/$(ImageName):$(tag)
+
+- publish: $(build.artifactstagingdirectory)
+  artifact: ContainerImages
+
+
 - task: Docker@2
   displayName: Push image to Docker hub
   inputs:
